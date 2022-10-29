@@ -39,4 +39,4 @@ def inbound():
         except Exception as e:
             print(e)
 
-        return Response(payload.get('challenge'), 200
+        return Response(payload.get('challenge')), 200
