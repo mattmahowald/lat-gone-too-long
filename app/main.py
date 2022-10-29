@@ -8,11 +8,11 @@ from english_words import english_words_set
 FIRST_NAME_LAST_INITIAL_PATTERN = re.compile(r"([A-Z][A-Za-z]* [A-Z]|[A-Z][A-Za-z]*)")
 
 
-app = Flask(__name__)
+# app = Flask(__name__)
 
 
 def parse_names(s):
-    matches = FIRST_NAME_LAST_INITIAL_PATTERN.search(s)
+    matches = FIRST_NAME_LAST_INITIAL_PATTERN.findall(s)
     return [m for m in matches if m.lower() not in english_words_set]
 
 
