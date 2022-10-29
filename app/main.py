@@ -15,6 +15,16 @@ def inbound():
     # When Slack sends a POST to your app, it will send a JSON payload:
     payload = flask_request.get_json()
 
-    # This response will only be used for the initial URL validation:
     if payload:
-        return Response(payload['challenge']), 200
+        # An optional security measure - check to see if the
+        # request is coming from an authorized Slack channel
+        channel_id = payload['event']['channel']
+        print(f"Message received in channel {channel_id}")
+
+        message = None
+        try:
+            elements = [x for x in payload['event']['blocks']][0]['elements'][0]['elements']
+            message = [e['text'].strip() for e in elements if e['type'] == 'text'][0]
+            client.chat_postMessage(channel=channel_id, text=f"Message received at {str(datetime.now())}: {message}")
+        except Exception as e:
+            print(e)
