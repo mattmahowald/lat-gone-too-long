@@ -25,6 +25,6 @@ def inbound():
         try:
             elements = [x for x in payload['event']['blocks']][0]['elements'][0]['elements']
             message = [e['text'].strip() for e in elements if e['type'] == 'text'][0]
-            client.chat_postMessage(channel=channel_id, text=f"Message received at {str(datetime.now())}: {message}")
+            print(message)
         except Exception as e:
             print(e)
