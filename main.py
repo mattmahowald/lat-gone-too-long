@@ -99,7 +99,7 @@ def write_to_sheets(names, message):
 
 def parse_slack_message(payload):
     message = None
-    app.logger.info("Received a slack message {payload}")
+    app.logger.info(f"Received a slack message {payload}")
     try:
         elements = [x for x in payload['event']['blocks']][0]['elements'][0]['elements']
         message = [e['text'].strip() for e in elements if e['type'] == 'text'][0]
